@@ -1,0 +1,11 @@
+:root {
+  --container-bg: #0e1d2c;
+  --main-bg: #0d151c;
+
+  --progress-done: #75b975;
+  --progress-left: #25476C;
+  --progress-scroller: #27466B;
+
+  --header-text: #D69B4F;
+  --logo-bg: #976C36;
+}
