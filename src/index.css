@@ -7,5 +7,31 @@
   --progress-scroller: #27466B;
 
   --header-text: #D69B4F;
+  --content-text: #f5f5f5;
   --logo-bg: #976C36;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  background: var(--main-bg);
+  color: whitesmoke;
+
+  display: flex;
+  flex-direction: column;
 }
