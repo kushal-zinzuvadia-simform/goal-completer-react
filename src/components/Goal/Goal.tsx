@@ -5,14 +5,14 @@ import { MainGoal } from '../MainGoal/MainGoal';
 import { useState } from 'react';
 
 export const Goal = () => {
-  const [progressList, setProgressList] = useState(
+  const [progressList, setProgressList] = useState<number[]>(
     goalData.subGoals.map(() => 0)
   );
 
   const totalCompletion =
     progressList.reduce((sum, value) => sum + value, 0) / progressList.length;
 
-  const updateProgress = (index, value) => {
+  const updateProgress = (index: number, value: number) => {
     const updated = [...progressList];
     updated[index] = value;
     setProgressList(updated);
@@ -35,7 +35,7 @@ export const Goal = () => {
 
             <ProgressBar
               progress={progressList[index]}
-              setProgress={(value) => updateProgress(index, value)}
+              setProgress={(value: number) => updateProgress(index, value)}
             />
           </div>
         );

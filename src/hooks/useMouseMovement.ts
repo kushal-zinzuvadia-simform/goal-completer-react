@@ -1,11 +1,20 @@
-import { useCallback, useEffect, useState } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useState,
+  type RefObject,
+  type MouseEvent,
+} from 'react';
 
-export const useMouseMovement = (trackRef, updateGlobalState) => {
-  const [progress, setProgress] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
+export const useMouseMovement = (
+  trackRef: RefObject<HTMLDivElement | null>,
+  updateGlobalState: (value: number) => void
+) => {
+  const [progress, setProgress] = useState<number>(0);
+  const [isDragging, setIsDragging] = useState<boolean>(false);
 
   const updateProgress = useCallback(
-    (clientX) => {
+    (clientX: number) => {
       if (!trackRef.current) return;
 
       const rect = trackRef.current.getBoundingClientRect();
@@ -20,13 +29,13 @@ export const useMouseMovement = (trackRef, updateGlobalState) => {
     [trackRef, updateGlobalState]
   );
 
-  const onMouseDown = (e) => {
+  const onMouseDown = (e: MouseEvent<HTMLDivElement>) => {
     setIsDragging(true);
     updateProgress(e.clientX);
   };
 
   useEffect(() => {
-    const handleMouseMove = (e) => {
+    const handleMouseMove = (e: globalThis.MouseEvent) => {
       if (!isDragging) return;
 
       updateProgress(e.clientX);

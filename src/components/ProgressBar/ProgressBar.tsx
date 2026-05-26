@@ -2,8 +2,13 @@ import './ProgressBar.css';
 import { useMouseMovement } from '../../hooks/useMouseMovement';
 import { useRef } from 'react';
 
-export const ProgressBar = ({ progress, setProgress }) => {
-  const trackRef = useRef(null);
+type ProgressBarProps = {
+  progress: number;
+  setProgress: (value: number) => void;
+};
+
+export const ProgressBar = ({ progress, setProgress }: ProgressBarProps) => {
+  const trackRef = useRef<HTMLDivElement | null>(null);
 
   const { isDragging, onMouseDown } = useMouseMovement(trackRef, setProgress);
 

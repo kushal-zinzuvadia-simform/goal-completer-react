@@ -1,8 +1,12 @@
 import { useRef } from 'react';
 import '../ProgressBar/ProgressBar.css';
 
-export const MainGoal = ({ progress }) => {
-  const trackRef = useRef(null);
+type MainGoalProps = {
+  progress: number;
+};
+
+export const MainGoal = ({ progress }: MainGoalProps) => {
+  const trackRef = useRef<HTMLDivElement | null>(null);
 
   return (
     <div className="goal-data">
