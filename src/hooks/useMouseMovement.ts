@@ -1,50 +1,50 @@
 import { useEffect, useState } from 'react';
 
-export const useMouseMovement = (trackRef) => {
-    const [progress, setProgress] = useState(0);
-    const [isDragging, setIsDragging] = useState(false);
+export const useMouseMovement = (trackRef, updateGlobalState) => {
+  const [progress, setProgress] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
 
-    const updateProgress = (clientX) => {
-        if (!trackRef.current) return;
+  const updateProgress = (clientX) => {
+    if (!trackRef.current) return;
 
-        const rect = trackRef.current.getBoundingClientRect();
+    const rect = trackRef.current.getBoundingClientRect();
 
-        let newProgress =
-            ((clientX - rect.left) / rect.width) * 100;
+    let newProgress = ((clientX - rect.left) / rect.width) * 100;
 
-        newProgress = Math.max(0, Math.min(100, newProgress));
+    newProgress = Math.max(0, Math.min(100, newProgress));
 
-        setProgress(Number(newProgress.toFixed()));
+    setProgress(Number(newProgress.toFixed()));
+    updateGlobalState(Number(newProgress.toFixed()));
+  };
+
+  const onMouseDown = (e) => {
+    setIsDragging(true);
+    updateProgress(e.clientX);
+  };
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      if (!isDragging) return;
+
+      updateProgress(e.clientX);
     };
 
-    const onMouseDown = (e) => {
-        setIsDragging(true);
-        updateProgress(e.clientX);
+    const handleMouseUp = () => {
+      setIsDragging(false);
     };
 
-    useEffect(() => {
-        const handleMouseMove = (e) => {
-            if (!isDragging) return;
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseup', handleMouseUp);
 
-            updateProgress(e.clientX);
-        };
-
-        const handleMouseUp = () => {
-            setIsDragging(false);
-        };
-
-        window.addEventListener('mousemove', handleMouseMove);
-        window.addEventListener('mouseup', handleMouseUp);
-
-        return () => {
-            window.removeEventListener('mousemove', handleMouseMove);
-            window.removeEventListener('mouseup', handleMouseUp);
-        };
-    }, [isDragging]);
-
-    return {
-        progress,
-        isDragging,
-        onMouseDown,
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
     };
+  }, [isDragging]);
+
+  return {
+    progress,
+    isDragging,
+    onMouseDown,
+  };
 };

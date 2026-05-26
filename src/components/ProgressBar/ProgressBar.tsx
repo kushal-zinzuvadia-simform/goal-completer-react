@@ -2,18 +2,15 @@ import './ProgressBar.css';
 import { useMouseMovement } from '../../hooks/useMouseMovement';
 import { useRef } from 'react';
 
-export const ProgressBar = () => {
+export const ProgressBar = ({ progress, setProgress }) => {
   const trackRef = useRef(null);
 
-  const { progress, isDragging, onMouseDown } = useMouseMovement(trackRef);
+  const { isDragging, onMouseDown } = useMouseMovement(trackRef, setProgress);
 
   return (
-    <>
+    <div className="goal-data">
       <div className="bar" ref={trackRef}>
-        <div
-          className="progress"
-          style={{ width: `${progress}%` }}
-        />
+        <div className="progress" style={{ width: `${progress}%` }} />
 
         <div
           className={`scroller ${isDragging ? 'dragging' : ''}`}
@@ -25,6 +22,6 @@ export const ProgressBar = () => {
       </div>
 
       <div>{progress}%</div>
-    </>
+    </div>
   );
 };
