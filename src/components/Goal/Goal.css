@@ -1,0 +1,21 @@
+.goal-table {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    background-color: var(--container-bg);
+
+    border: 2px solid var(--logo-bg);
+    border-radius: 1rem;
+    margin: 2rem;
+    padding: 2rem;
+}
+
+.goal-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5rem;
+}
+
+.sub-goal {
+    padding-left: 2rem;
+}

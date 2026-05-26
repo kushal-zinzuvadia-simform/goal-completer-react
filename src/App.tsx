@@ -1,8 +1,8 @@
+import { Goal } from "./components/Goal/Goal";
+
 function App() {
   return (
-    <div>
-      
-    </div>
+    <Goal></Goal>
   );
 }
 

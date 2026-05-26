@@ -1,0 +1,31 @@
+.bar {
+    width: 8rem;
+    height: 0.5rem;
+    background-color: var(--progress-left);
+}
+
+.scroller {
+    width: 1.25rem;
+    height: 1.25rem;
+
+    border: 3px solid var(--progress-done);
+    border-radius: 50%;
+    background-color: var(--progress-scroller);
+
+    position: relative;
+    bottom: 0.875rem;
+    left: 0.5rem;
+
+    cursor: grab;
+}
+
+.scroller:active {
+    cursor: grabbing;
+}
+
+.progress {
+    width: 1rem;
+    height: 0.5rem;
+    background-color: var(--progress-done);
+    position: relative;
+}
