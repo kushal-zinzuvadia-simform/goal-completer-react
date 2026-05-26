@@ -1,21 +1,24 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 export const useMouseMovement = (trackRef, updateGlobalState) => {
   const [progress, setProgress] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
 
-  const updateProgress = (clientX) => {
-    if (!trackRef.current) return;
+  const updateProgress = useCallback(
+    (clientX) => {
+      if (!trackRef.current) return;
 
-    const rect = trackRef.current.getBoundingClientRect();
+      const rect = trackRef.current.getBoundingClientRect();
 
-    let newProgress = ((clientX - rect.left) / rect.width) * 100;
+      let newProgress = ((clientX - rect.left) / rect.width) * 100;
 
-    newProgress = Math.max(0, Math.min(100, newProgress));
+      newProgress = Math.max(0, Math.min(100, newProgress));
 
-    setProgress(Number(newProgress.toFixed()));
-    updateGlobalState(Number(newProgress.toFixed()));
-  };
+      setProgress(Number(newProgress.toFixed()));
+      updateGlobalState(Number(newProgress.toFixed()));
+    },
+    [trackRef, updateGlobalState]
+  );
 
   const onMouseDown = (e) => {
     setIsDragging(true);
@@ -40,7 +43,7 @@ export const useMouseMovement = (trackRef, updateGlobalState) => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseup', handleMouseUp);
     };
-  }, [isDragging]);
+  }, [isDragging, updateProgress]);
 
   return {
     progress,
