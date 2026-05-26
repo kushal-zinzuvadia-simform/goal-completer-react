@@ -1,6 +1,5 @@
 .goal-progress {
     position: relative;
-    /* left: 20rem; */
     display: flex;
     align-items: center;
     gap: 1rem;

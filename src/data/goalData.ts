@@ -3,7 +3,6 @@ export const goalData = {
     totalProgress: 41.25,
     subGoals: [
         {
-            // id: crypto.randomUUID(),
             id: 1,
             title: "Understand Spec Driven Development",
             progress: 90,
