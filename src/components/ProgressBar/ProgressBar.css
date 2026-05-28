@@ -1,0 +1,46 @@
+.goal-data {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.25rem;
+}
+
+.bar {
+  width: 18rem;
+  height: 0.5rem;
+  background-color: var(--progress-left);
+  border-radius: 999px;
+  position: relative;
+}
+
+.scroller {
+  width: 1.25rem;
+  height: 1.25rem;
+
+  border: 3px solid var(--progress-done);
+  border-radius: 50%;
+  background-color: var(--progress-scroller);
+
+  position: absolute;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  cursor: grab;
+
+  transition:
+    left 0.08s linear,
+    box-shadow 0.15s ease;
+}
+
+.scroller.dragging {
+  cursor: grabbing;
+  transition: none;
+}
+
+.progress {
+  height: 100%;
+  background-color: var(--progress-done);
+  border-radius: inherit;
+}

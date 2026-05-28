@@ -3,12 +3,12 @@
   --main-bg: #0d151c;
 
   --progress-done: #75b975;
-  --progress-left: #25476C;
-  --progress-scroller: #27466B;
+  --progress-left: #25476c;
+  --progress-scroller: #27466b;
 
-  --header-text: #D69B4F;
+  --header-text: #d69b4f;
   --content-text: #f5f5f5;
-  --logo-bg: #976C36;
+  --logo-bg: #976c36;
 }
 
 *,

@@ -1,9 +1,7 @@
+import { Goal } from './components/Goal/Goal';
+
 function App() {
-  return (
-    <div>
-      
-    </div>
-  );
+  return <Goal />;
 }
 
 export default App;
