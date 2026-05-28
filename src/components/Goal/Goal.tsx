@@ -1,8 +1,8 @@
-import { goalData } from '../../data/goalData';
-import './Goal.css';
-import { ProgressBar } from '../ProgressBar/ProgressBar';
-import { MainGoal } from '../MainGoal/MainGoal';
 import { useState } from 'react';
+import './Goal.css';
+import { goalData } from '../../data/goalData';
+import { ProgressBar } from '../ProgressBar/ProgressBar';
+import { ProgressDisplay } from '../ProgressDisplay/ProgressDisplay';
 
 export const Goal = () => {
   const [progressList, setProgressList] = useState<number[]>(
@@ -10,7 +10,10 @@ export const Goal = () => {
   );
 
   const totalCompletion =
-    progressList.reduce((sum, value) => sum + value, 0) / progressList.length;
+    progressList.length === 0
+      ? 0
+      : progressList.reduce((sum, value) => sum + value, 0) /
+        progressList.length;
 
   const updateProgress = (index: number, value: number) => {
     const updated = [...progressList];
@@ -23,7 +26,11 @@ export const Goal = () => {
       <div className="goal-row">
         <h2>{goalData.title}</h2>
 
-        <MainGoal progress={totalCompletion} />
+        <ProgressDisplay
+          progress={totalCompletion}
+          scrollerStyle={{ pointerEvents: 'none', transition: 'none' }}
+          roundDisplay
+        />
       </div>
 
       {goalData.subGoals.map((data, index) => {
@@ -35,7 +42,7 @@ export const Goal = () => {
 
             <ProgressBar
               progress={progressList[index]}
-              setProgress={(value: number) => updateProgress(index, value)}
+              setProgress={(value) => updateProgress(index, value)}
             />
           </div>
         );
